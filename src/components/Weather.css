@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
+
+.weather-main {
+  width: 50%;
+  margin: 20px;
+  border-radius: 20px;
+  background-color: #01579b;
+}
+
+.weather-top {
+  height: 50px;
+  background-color: #424242;
+  color: whitesmoke;
+  padding: 10px;
+  font-size: 28px;
+  border-radius: 20px 20px 0px 0px;
+  font-family: "Recursive", sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  margin: 10px 10px 10px 10px;
+}
+.refresh-btn {
+  width: 35px;
+  height: 35px;
+}
+
+.date,
+.desc {
+  padding: 15px;
+  color: whitesmoke;
+  font-family: "Recursive", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+.temp,
+.hum {
+  padding: 15px;
+  color: whitesmoke;
+  font-family: "Recursive", sans-serif;
+  font-size: 20px;
+}
+.sun {
+  display: block;
+  padding: 15px;
+  color: whitesmoke;
+  font-family: "Recursive", sans-serif;
+  font-size: 15px;
+}
+
+.position {
+  display: flex;
+  justify-content: space-between;
+}
