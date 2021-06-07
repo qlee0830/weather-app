@@ -1,42 +1,50 @@
 import React, { useState, useEffect } from "react";
 import WeatherCard from "./components/Weather";
 import { Dimmer, Loader } from "semantic-ui-react";
+import LocationSearchInput from "./components/PlaceInput";
 
 import "./App.css";
 
 export default function App() {
-  const [lat, setLat] = useState([]);
-  const [long, setLong] = useState([]);
+  const [latLng, setLatLng] = useState(null);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
+      setLatLng({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
     });
   }, []);
 
   useEffect(() => {
-    if (lat && long) {
+    if (latLng && latLng.lat && latLng.lng) {
       fetchData();
     }
-  }, [lat, long]);
+  }, [latLng]);
 
   const fetchData = async () => {
     await fetch(
-      `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+      `${process.env.REACT_APP_API_URL}/weather/?lat=${latLng.lat}&lon=${latLng.lng}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
         setData(result);
-        console.log(result);
       });
+  };
+
+  const saveLocation = (location) => {
+    setLatLng(location);
   };
 
   return (
     <div className="App">
       {typeof data.main != "undefined" ? (
-        <WeatherCard weatherData={data} />
+        <div>
+          <LocationSearchInput saveLocation={saveLocation} />
+          <WeatherCard weatherData={data} />
+        </div>
       ) : (
         <div>
           <Dimmer active>
